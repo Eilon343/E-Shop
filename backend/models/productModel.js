@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const ProductSchema = mongoose.Schema(
   {
-    name: { type: String, required: true, unique: true },
+    title: { type: String, required: true, unique: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
     image: { type: String, required: true },
@@ -10,8 +10,16 @@ const ProductSchema = mongoose.Schema(
     countInStock: { type: Number, required: true },
     token: { type: String, required: true, unique: true },
     brand: { type: String, required: true },
-    rating: { type: Number, required: true },
-    numReviews: { type: Number, required: true },
+    rating: {
+      rate: {
+        type: Number,
+        required: true,
+      },
+      count: {
+        type: Number,
+        required: true,
+      },
+    },
   },
   { timestamps: true }
 );

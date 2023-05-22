@@ -2,26 +2,23 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
-import NavBar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
-import { LinkContainer } from 'react-router-bootstrap';
+import CartPage from './pages/CartPage';
+import Navbar from './components/Navbar';
+import SignInPage from './pages/SignInPage';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="d-flex flex-column side-allpage">
         <header>
-          <NavBar bg="dark" variant="dark">
-            <Container>
-              <LinkContainer to="/">
-                <NavBar.Brand>EShop</NavBar.Brand>
-              </LinkContainer>
-            </Container>
-          </NavBar>
+          <Navbar />
         </header>
         <main>
-          <Container>
+          <Container className="mt-3">
             <Routes>
+              <Route path="/signin" element={<SignInPage />} />
+              <Route path="/cart" element={<CartPage />} />
               <Route path="/product/:token" element={<ProductPage />} />
               <Route path="/" element={<HomePage />} />
             </Routes>

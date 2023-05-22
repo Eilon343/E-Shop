@@ -69,7 +69,7 @@ const data = {
         "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
       category: 'Jewelery',
       image: 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
-      countInStock: 16,
+      countInStock: 0,
       token:
         "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
       brand: 'John Hardy',

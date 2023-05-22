@@ -3,6 +3,8 @@ import axios from 'axios';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ProductItem from '../components/ProductItem';
+import Loading from '../components/Loading';
+import MessageBox from '../components/MessageBox';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,7 +30,7 @@ const HomePage = () => {
     const getProducts = async () => {
       dispatch({ type: 'GET_REQUEST' });
       try {
-        const res = await axios.get('/api/v1/products');
+        const res = await axios.get('/api/v1/product');
         dispatch({ type: 'GET_SUCCESS', payload: res.data });
       } catch (err) {
         dispatch({ type: 'GET_FAIL', payload: err.message });
@@ -42,13 +44,13 @@ const HomePage = () => {
       <h1>Products</h1>
       <div className="product-list">
         {loading ? (
-          <p>Loading...</p>
+          <Loading />
         ) : error ? (
-          <p>{error}</p>
+          <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <Row>
             {products.map((product) => (
-              <Col lg={3} md={4} sm={6} className="mb-3">
+              <Col key={product.token} lg={3} md={4} sm={6} className="mb-5">
                 <ProductItem product={product} />
               </Col>
             ))}
