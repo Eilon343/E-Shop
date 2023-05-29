@@ -1,9 +1,20 @@
-import React, { useContext } from 'react';
-import { Store } from '../store';
-import { Helmet } from 'react-helmet-async';
-import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap';
-import MessageBox from '../components/MessageBox';
-import { Link, useNavigate } from 'react-router-dom';
+import {
+  useContext,
+  Store,
+  Col,
+  Row,
+  Helmet,
+  axios,
+  ADD_TO_CART,
+  GET_FAIL,
+  REMOVE_FROM_CART,
+  useNavigate,
+  MessageBox,
+  Link,
+  ListGroup,
+  Button,
+  Card,
+} from '../Imports';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const CartPage = () => {
@@ -14,24 +25,27 @@ const CartPage = () => {
   } = state;
 
   // Function to update the quantity of an item in the cart
-  const updateCartHandler = (item, quantity) => {
-    const { data } = item;
-    console.log(data);
-    if (item.countInStock < quantity) {
-      window.alert('Sorry, this item is unavailable');
+  const updateCartHandler = async (item, quantity) => {
+    try {
+      const { data } = await axios.get(`/api/v1/products/${item._id}`);
+      if (data.countInStock < quantity) {
+        window.alert('Sorry, this item is unavailable');
+      }
+      // Dispatch an action to add the item with updated quantity to the cart
+      ctxDispatch({
+        type: ADD_TO_CART,
+        payload: { ...item, quantity },
+      });
+    } catch (err) {
+      ctxDispatch({ type: GET_FAIL, payload: err.message });
     }
-    // Dispatch an action to add the item with updated quantity to the cart
-    ctxDispatch({
-      type: 'ADD_TO_CART',
-      payload: { ...item, quantity },
-    });
   };
 
   // Function to remove an item from the cart
   const removeItemHandler = (item) => {
     // Dispatch an action to remove the item from the cart
     ctxDispatch({
-      type: 'REMOVE_FROM_CART',
+      type: REMOVE_FROM_CART,
       payload: item,
     });
   };
@@ -43,7 +57,6 @@ const CartPage = () => {
 
   // Function to handle the drag and drop functionality
   const handleDragEnd = (result) => {
-    console.log(state);
     // Dispatch an action to handle the drag and drop event
     ctxDispatch({
       type: 'DROP_END',

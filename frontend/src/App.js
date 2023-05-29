@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import SignInPage from './pages/SignInPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ShippingAddressPage from './pages/ShippingAddressPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <main>
           <Container className="mt-3">
             <Routes>
+              <Route path="/shipping" element={<ShippingAddressPage />} />
               <Route path="/signin" element={<SignInPage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/product/:token" element={<ProductPage />} />

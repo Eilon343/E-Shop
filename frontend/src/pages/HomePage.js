@@ -1,28 +1,20 @@
-import React, { useEffect, useReducer } from 'react';
-import axios from 'axios';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import ProductItem from '../components/ProductItem';
-import Loading from '../components/Loading';
-import MessageBox from '../components/MessageBox';
-//todo: all imports in separate file
-
-//todo: export all case string into const
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'GET_REQUEST':
-      return { ...state, loading: true };
-    case 'GET_SUCCESS':
-      return { ...state, products: action.payload, loading: false };
-    case 'GET_FAIL':
-      return { ...state, loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
+import {
+  useEffect,
+  useReducer,
+  axios,
+  Loading,
+  MessageBox,
+  GET_SUCCESS,
+  GET_FAIL,
+  GET_REQUEST,
+  homePageReducer,
+  Row,
+  Col,
+  ProductItem,
+} from '../Imports';
 
 const HomePage = () => {
-  const [{ loading, error, products }, dispatch] = useReducer(reducer, {
+  const [{ loading, error, products }, dispatch] = useReducer(homePageReducer, {
     loading: true,
     error: '',
     products: [],
@@ -30,12 +22,12 @@ const HomePage = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      dispatch({ type: 'GET_REQUEST' });
+      dispatch({ type: GET_REQUEST });
       try {
         const res = await axios.get('/api/v1/products');
-        dispatch({ type: 'GET_SUCCESS', payload: res.data });
+        dispatch({ type: GET_SUCCESS, payload: res.data });
       } catch (err) {
-        dispatch({ type: 'GET_FAIL', payload: err.message });
+        dispatch({ type: GET_FAIL, payload: err.message });
       }
     };
     getProducts();

@@ -1,31 +1,28 @@
-import React, { useContext, useEffect, useReducer } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Card from 'react-bootstrap/Card';
-import Rating from '../components/Rating';
-import Button from 'react-bootstrap/Button';
-import Badge from 'react-bootstrap/Badge';
-import { Helmet } from 'react-helmet-async';
-import Loading from '../components/Loading';
-import MessageBox from '../components/MessageBox';
-import { getError } from '../utils';
-import { Store } from '../store';
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'GET_REQUEST':
-      return { ...state, loading: true };
-    case 'GET_SUCCESS':
-      return { ...state, product: action.payload, loading: false };
-    case 'GET_FAIL':
-      return { ...state, loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
+import {
+  useParams,
+  useEffect,
+  useReducer,
+  axios,
+  Row,
+  Col,
+  Loading,
+  MessageBox,
+  getError,
+  ListGroup,
+  Store,
+  useContext,
+  useNavigate,
+  GET_REQUEST,
+  GET_FAIL,
+  GET_SUCCESS,
+  productPageReducer,
+  ADD_TO_CART,
+  Helmet,
+  Rating,
+  Card,
+  Badge,
+  Button,
+} from '../Imports';
 
 const ProductPage = () => {
   const navigate = useNavigate();
@@ -35,21 +32,24 @@ const ProductPage = () => {
   const { cart } = state;
 
   // Use reducer hook to manage state and dispatch actions
-  const [{ loading, error, product }, dispatch] = useReducer(reducer, {
-    loading: true,
-    error: '',
-    product: [],
-  });
+  const [{ loading, error, product }, dispatch] = useReducer(
+    productPageReducer,
+    {
+      loading: true,
+      error: '',
+      product: [],
+    }
+  );
 
   useEffect(() => {
     // Fetch product details from the server when the component mounts
     const getProducts = async () => {
-      dispatch({ type: 'GET_REQUEST' });
+      dispatch({ type: GET_REQUEST });
       try {
         const res = await axios.get(`/api/v1/products/token/${token}`);
-        dispatch({ type: 'GET_SUCCESS', payload: res.data });
+        dispatch({ type: GET_SUCCESS, payload: res.data });
       } catch (err) {
-        dispatch({ type: 'GET_FAIL', payload: getError(err) });
+        dispatch({ type: GET_FAIL, payload: getError(err) });
       }
     };
     getProducts();
@@ -59,12 +59,12 @@ const ProductPage = () => {
     // Add the product to the cart and navigate to the cart page
     const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/v1/product/${product._id}`);
+    const { data } = await axios.get(`/api/v1/products/${product._id}`);
     if (data.countInStock < quantity) {
       window.alert('Sorry, Product is out of stock');
       return;
     }
-    ctxDispatch({ type: 'ADD_TO_CART', payload: { ...product, quantity } });
+    ctxDispatch({ type: ADD_TO_CART, payload: { ...product, quantity } });
     navigate('/cart');
   };
 

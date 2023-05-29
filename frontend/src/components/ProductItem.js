@@ -1,9 +1,4 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Rating from './Rating';
-import { Store } from '../store';
+import { useContext, Link, Card, Button, Rating, Store, ADD_TO_CART } from '../Imports';
 
 const ProductItem = ({ product }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -17,7 +12,7 @@ const ProductItem = ({ product }) => {
       window.alert('Sorry, this item is unavailable');
     }
     ctxDispatch({
-      type: 'ADD_TO_CART',
+      type: ADD_TO_CART,
       payload: { ...item, quantity },
     });
   };
@@ -29,7 +24,7 @@ const ProductItem = ({ product }) => {
       </Link>
       <Card.Body className="d-flex flex-column  justify-content-end">
         <Link to={`/product/${product.token}`}>
-          <Card.Title className='custom-title'>{product.title}</Card.Title>
+          <Card.Title className="custom-title">{product.title}</Card.Title>
         </Link>
         <Rating rating={product.rating} />
         <Card.Text>

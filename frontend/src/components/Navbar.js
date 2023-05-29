@@ -1,18 +1,22 @@
-import NavBar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Badge, Nav, NavDropdown } from 'react-bootstrap';
-import { Link, useLocation } from 'react-router-dom';
-import { useContext } from 'react';
-import { Store } from '../store';
+import {
+  NavBar,
+  Container,
+  LinkContainer,
+  useContext,
+  Badge,
+  Nav,
+  NavDropdown,
+  Link,
+  useLocation,
+  Store,
+} from '../Imports';
 
-const Navbar = () => {
+const CustomNavbar = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   // const { state } = useContext(Store);
   const { cart } = state;
   const { userInfo } = state;
   const location = useLocation();
-  console.log(userInfo);
 
   const SignOutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
@@ -71,7 +75,7 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default CustomNavbar;
 
 // import NavBar from 'react-bootstrap/Navbar';
 // import Container from 'react-bootstrap/Container';
