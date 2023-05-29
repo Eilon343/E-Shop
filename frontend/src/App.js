@@ -6,11 +6,14 @@ import Container from 'react-bootstrap/Container';
 import CartPage from './pages/CartPage';
 import Navbar from './components/Navbar';
 import SignInPage from './pages/SignInPage';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="d-flex flex-column side-allpage">
+        <ToastContainer position="bottom-center" limit={1} />
         <header>
           <Navbar />
         </header>

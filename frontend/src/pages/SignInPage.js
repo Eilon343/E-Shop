@@ -6,8 +6,8 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Helmet } from 'react-helmet-async';
-import { toast } from 'react-toastify';
 import { Store } from '../store';
+import { toast } from 'react-toastify';
 
 const SignInPage = () => {
   const navigate = useNavigate();

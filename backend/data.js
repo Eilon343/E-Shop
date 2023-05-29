@@ -1,3 +1,5 @@
+import Bcrypt from 'bcryptjs';
+
 const data = {
   products: [
     {
@@ -551,6 +553,13 @@ const data = {
         rate: 2.9,
         count: 502,
       },
+    },
+  ],
+  users: [
+    {
+      name: 'Admin',
+      email: 'admin@gmail.com',
+      password: Bcrypt.hashSync('12345'),
     },
   ],
 };

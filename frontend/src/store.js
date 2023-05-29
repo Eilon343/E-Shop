@@ -10,6 +10,9 @@ const initialState = {
       ? JSON.parse(localStorage.getItem('cartItems'))
       : [],
   },
+  userInfo: localStorage.getItem('userInfo')
+    ? JSON.parse(localStorage.getItem('userInfo'))
+    : null,
 };
 
 // Define the reducer function to handle state updates based on dispatched actions
@@ -60,6 +63,13 @@ const reducer = (state, action) => {
 
       // Return the updated state with the reordered cart items
       return { ...state, cart: { ...state.cart, cartItems: items } };
+    }
+    case 'USER_SIGNIN': {
+      console.log(state.action);
+      return { ...state, userInfo: action.payload };
+    }
+    case 'USER_SIGNOUT': {
+      return { ...state, userInfo: null };
     }
 
     default:
