@@ -26,7 +26,7 @@ const ProductItem = ({ product }) => {
         <Link to={`/product/${product.token}`}>
           <Card.Title className="custom-title">{product.title}</Card.Title>
         </Link>
-        <Rating rating={product.rating} />
+        <Rating  rating={product.rating} />
         <Card.Text>
           <strong>{product.price}$</strong>
         </Card.Text>

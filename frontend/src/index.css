@@ -79,3 +79,27 @@ main {
 .small-container {
   max-width: 600px;
 }
+
+.checkout-steps > div {
+  border-bottom: 0.2rem solid #a0a0a0;
+  color: #a0a0a0;
+}
+
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid #f08000;
+  color: #f08000;
+}
+
+@media screen and (max-width: 1024px) {
+  .align-arrow-right {
+    /* left: 120px;
+    top: calc(50% - 8px);
+    transform: none; */
+    visibility: collapse;
+  }
+}
+
+.highlight-page {
+  background-color: #f0c040 !important;
+  color: #000000 !important;
+}

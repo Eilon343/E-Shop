@@ -1,4 +1,4 @@
-import { Row, Col } from "react-bootstrap";
+import { Row, Col } from 'react-bootstrap';
 export default function CheckoutSteps(props) {
   return (
     <Row className="checkout-steps">
@@ -8,4 +8,4 @@ export default function CheckoutSteps(props) {
       <Col className={props.step4 ? 'active' : ''}>Place Order</Col>
     </Row>
   );
-};
+}

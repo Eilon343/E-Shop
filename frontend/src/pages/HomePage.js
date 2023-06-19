@@ -11,6 +11,7 @@ import {
   Row,
   Col,
   ProductItem,
+  Helmet,
 } from '../Imports';
 
 const HomePage = () => {
@@ -35,6 +36,9 @@ const HomePage = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <h1>Products</h1>
       <div className="product-list">
         {loading ? (
