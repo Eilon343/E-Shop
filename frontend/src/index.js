@@ -8,7 +8,7 @@ import {
   HelmetProvider,
   StoreProvider,
 } from './Imports';
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'https://eshop-server-9jd8.onrender.com';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
