@@ -1,4 +1,12 @@
-import { useContext, Link, Card, Button, Rating, Store, ADD_TO_CART } from '../Imports';
+import {
+  useContext,
+  Link,
+  Card,
+  Button,
+  Rating,
+  Store,
+  ADD_TO_CART,
+} from '../Imports';
 
 const ProductItem = ({ product }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -19,14 +27,14 @@ const ProductItem = ({ product }) => {
 
   return (
     <Card className="product-card">
-      <Link to={`product/${product.token}`}>
+      <Link to={`/product/${product.token}`}>
         <img className="card-img-top" src={product.image} alt={product.name} />
       </Link>
       <Card.Body className="d-flex flex-column  justify-content-end">
         <Link to={`/product/${product.token}`}>
           <Card.Title className="custom-title">{product.title}</Card.Title>
         </Link>
-        <Rating  rating={product.rating} />
+        <Rating rating={product.rating} />
         <Card.Text>
           <strong>{product.price}$</strong>
         </Card.Text>
