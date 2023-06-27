@@ -1,17 +1,32 @@
 // Importing necessary dependencies and components
 import {
-  axios, useLocation, useNavigate, Container, useContext, useEffect, useState, Store,
-  getError, Helmet, USER_SIGNIN, Form, Link, Button, toast
+  axios,
+  useLocation,
+  useNavigate,
+  Container,
+  useContext,
+  useEffect,
+  useState,
+  Store,
+  getError,
+  Helmet,
+  USER_SIGNIN,
+  Form,
+  Link,
+  Button,
+  toast,
+  Loading,
 } from '../Imports';
 
 const SignInPage = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
-
+  const [isLoading, setIsLoading] = useState(false);
+  
   // Extracting 'redirect' parameter from the URL, if it exists
   const redirectInUrl = new URLSearchParams(search).get('redirect');
   const redirect = redirectInUrl ? redirectInUrl : '/';
-
+  
   // Initializing state variables for email and password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,6 +37,7 @@ const SignInPage = () => {
 
   // Function to handle form submission
   const submitHandler = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       const { data } = await axios.post('/api/v1/users/signin', {
@@ -31,6 +47,7 @@ const SignInPage = () => {
 
       // Dispatching a user sign-in action with the received data
       ctxDispatch({ type: USER_SIGNIN, payload: data });
+      setIsLoading(false);
 
       // Storing user information in local storage
       localStorage.setItem('userInfo', JSON.stringify(data));
@@ -76,6 +93,7 @@ const SignInPage = () => {
         <div className="mb-3">
           <Button type="submit">Sign In</Button>
         </div>
+        {isLoading && <Loading />}
         <div className="mb-3">
           New customer?{' '}
           <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>

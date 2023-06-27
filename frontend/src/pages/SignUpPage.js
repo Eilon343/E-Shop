@@ -15,6 +15,7 @@ import {
   Link,
   Button,
   toast,
+  Loading,
 } from '../Imports';
 
 const SignUpPage = () => {
@@ -30,6 +31,7 @@ const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   // Accessing global state and dispatch function from the context
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -37,6 +39,7 @@ const SignUpPage = () => {
 
   // Function to handle form submission
   const submitHandler = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
@@ -51,6 +54,7 @@ const SignUpPage = () => {
 
       // Dispatching a user sign-in action with the received data
       ctxDispatch({ type: USER_SIGNIN, payload: data });
+      setIsLoading(false);
 
       // Storing user information in local storage
       localStorage.setItem('userInfo', JSON.stringify(data));
@@ -112,6 +116,7 @@ const SignUpPage = () => {
         <div className="mb-3">
           <Button type="submit">Sign Up</Button>
         </div>
+        {isLoading && <Loading />}
         <div className="mb-3">
           Already have an account?{' '}
           <Link to={`/signin?redirect=${redirect}`}>Sign In</Link>
