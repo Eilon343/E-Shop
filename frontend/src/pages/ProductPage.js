@@ -78,11 +78,7 @@ const ProductPage = () => {
         <div>
           <Row>
             <Col md={6}>
-              <img
-                className="img-large"
-                src={product.image}
-                alt={product.title}
-              ></img>
+              <img className="product-image" src={product.image} alt={product.title}></img>
             </Col>
             <Col md={3}>
               <ListGroup variant="flush">
