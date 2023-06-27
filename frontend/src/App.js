@@ -14,6 +14,7 @@ import PaymentMethodPage from './pages/PaymentMethodPage';
 import SubmitOrderPage from './pages/SubmitOrderPage';
 import OrderPage from './pages/OrderPage';
 import SearchPage from './pages/SearchPage';
+import OrderHistory from './pages/OrderHistory';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <main>
           <Container className="mt-3">
             <Routes>
+              <Route path="/orderhistory" element={<OrderHistory />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/place-order/order/:id" element={<OrderPage />} />
               <Route path="/place-order" element={<SubmitOrderPage />} />

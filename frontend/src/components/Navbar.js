@@ -12,7 +12,6 @@ import {
   useNavigate,
 } from '../Imports';
 import SearchBox from './SearchBox';
-import GeoLocation from './GeoLocation';
 
 const CustomNavbar = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -59,7 +58,7 @@ const CustomNavbar = () => {
               </Badge>
             )}
           </Link>
-\          {userInfo ? (
+          {userInfo ? (
             <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
               <LinkContainer to="/profile">
                 <NavDropdown.Item>User Profile</NavDropdown.Item>

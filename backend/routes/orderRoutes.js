@@ -7,17 +7,18 @@ import { isAuth } from '../utils.js';
 
 const orderRouter = express.Router();
 
-// Retrieve an Order by ID
 orderRouter.get(
-  '/:id',
-  isAuth, // Middleware: Authentication required
+  '/history/:_id',
+  isAuth,
   expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
-
-    if (order) {
-      res.send(order);
-    } else {
-      res.status(404).send({ message: 'Order not found' });
+    console.log('id from server: ', req.params._id);
+    try {
+      const userById = await User.findById(req.params._id);
+      console.log(userById);
+      const orders = await Order.find({ user: userById });
+      res.status(201).send(orders);
+    } catch (err) {
+      res.status(404).send({ message: 'User not found' });
     }
   })
 );
@@ -40,6 +41,20 @@ orderRouter.post(
 
     const order = await newOrder.save();
     res.status(201).send({ message: 'New Order Created', order });
+  })
+);
+// Retrieve an Order by ID
+orderRouter.get(
+  '/:id',
+  isAuth, // Middleware: Authentication required
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+
+    if (order) {
+      res.send(order);
+    } else {
+      res.status(404).send({ message: 'Order not found' });
+    }
   })
 );
 
