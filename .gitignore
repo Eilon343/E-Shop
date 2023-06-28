@@ -18,7 +18,8 @@ build
 .env.development
 .env.test.local
 .env.production
-.env-cmdrc.json
+.env.staging
+
 
 npm-debug.log*
 yarn-debug.log*

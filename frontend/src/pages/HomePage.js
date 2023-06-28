@@ -25,7 +25,6 @@ const responsive = {
 };
 
 const HomePage = () => {
-  console.log(process.env.REACT_APP_API_ENDPOINT);
   const [{ loading, error, products }, dispatch] = useReducer(homePageReducer, {
     loading: true,
     error: "",

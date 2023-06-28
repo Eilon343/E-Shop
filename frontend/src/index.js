@@ -1,5 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 import {
   React,
   ReactDOM,
@@ -7,11 +7,11 @@ import {
   axios,
   HelmetProvider,
   StoreProvider,
-} from './Imports';
-// axios.defaults.baseURL = 'https://eshop-server-9jd8.onrender.com';
-axios.defaults.baseURL = 'http://localhost:5000';
+} from "./Imports";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+axios.defaults.baseURL = process.env.REACT_APP_API_ENDPOINT;
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <StoreProvider>
     <HelmetProvider>
