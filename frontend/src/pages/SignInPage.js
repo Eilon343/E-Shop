@@ -16,20 +16,20 @@ import {
   Button,
   toast,
   Loading,
-} from '../Imports';
+} from "../Imports";
 
 const SignInPage = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
   const [isLoading, setIsLoading] = useState(false);
-  
+
   // Extracting 'redirect' parameter from the URL, if it exists
-  const redirectInUrl = new URLSearchParams(search).get('redirect');
-  const redirect = redirectInUrl ? redirectInUrl : '/';
-  
+  const redirectInUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/";
+
   // Initializing state variables for email and password
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // Accessing global state and dispatch function from the context
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -40,7 +40,7 @@ const SignInPage = () => {
     setIsLoading(true);
     e.preventDefault();
     try {
-      const { data } = await axios.post('/api/v1/users/signin', {
+      const { data } = await axios.post("/api/v1/users/signin", {
         email,
         password,
       });
@@ -50,10 +50,10 @@ const SignInPage = () => {
       setIsLoading(false);
 
       // Storing user information in local storage
-      localStorage.setItem('userInfo', JSON.stringify(data));
+      localStorage.setItem("userInfo", JSON.stringify(data));
 
       // Navigating to the specified redirect URL or the home page
-      navigate(redirect || '/');
+      navigate(redirect || "/");
     } catch (err) {
       toast.error(getError(err));
     }
@@ -95,11 +95,11 @@ const SignInPage = () => {
         </div>
         {isLoading && <Loading />}
         <div className="mb-3">
-          New customer?{' '}
+          New customer?{" "}
           <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
         </div>
         <div className="mb-3">
-          Forget Password? <Link to={`/forget-password`}>Reset Password</Link>
+          Forget Password? <Link to={`/forgot-password`}>Reset Password</Link>
         </div>
       </Form>
     </Container>

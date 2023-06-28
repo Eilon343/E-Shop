@@ -1,11 +1,19 @@
-import Jwt from 'jsonwebtoken';
+import Jwt from "jsonwebtoken";
 
 // Function to generate a JWT token for a user
 export const generateToken = (user) => {
   return Jwt.sign(
     { _id: user._id, name: user.name, email: user.email },
     process.env.JWT_PW,
-    { expiresIn: '15d' }
+    { expiresIn: "15d" }
+  );
+};
+
+export const generateTokenForgotPassword = (user) => {
+  return Jwt.sign(
+    { _id: user._id, name: user.name, email: user.email },
+    process.env.JWT_PW,
+    { expiresIn: "5m" }
   );
 };
 
@@ -20,7 +28,7 @@ export const isAuth = (req, res, next) => {
     // Verify the token using the secret key
     Jwt.verify(token, process.env.JWT_PW, (err, decode) => {
       if (err) {
-        res.status(401).send({ message: 'Invalid Token' });
+        res.status(401).send({ message: "Invalid Token" });
       } else {
         // If the token is valid, set the decoded user information in the request object
         req.user = decode;
@@ -29,6 +37,6 @@ export const isAuth = (req, res, next) => {
     });
   } else {
     // If no authorization header is provided, send an error response
-    res.status(401).send({ message: 'No Token' });
+    res.status(401).send({ message: "No Token" });
   }
 };

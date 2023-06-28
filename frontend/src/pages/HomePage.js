@@ -12,9 +12,9 @@ import {
   Col,
   ProductItem,
   Helmet,
-} from '../Imports';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+} from "../Imports";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const responsive = {
   main: {
@@ -25,9 +25,10 @@ const responsive = {
 };
 
 const HomePage = () => {
+  console.log(process.env.REACT_APP_API_ENDPOINT);
   const [{ loading, error, products }, dispatch] = useReducer(homePageReducer, {
     loading: true,
-    error: '',
+    error: "",
     products: [],
   });
 
@@ -35,7 +36,7 @@ const HomePage = () => {
     const getProducts = async () => {
       dispatch({ type: GET_REQUEST });
       try {
-        const res = await axios.get('/api/v1/products');
+        const res = await axios.get("/api/v1/products");
         dispatch({ type: GET_SUCCESS, payload: res.data });
       } catch (err) {
         dispatch({ type: GET_FAIL, payload: err.message });
@@ -60,7 +61,7 @@ const HomePage = () => {
           customTransition="all .5"
           transitionDuration={500}
           containerClass="carousel-container"
-          removeArrowOnDeviceType={'main'}
+          removeArrowOnDeviceType={"main"}
           dotListClass="custom-dot-list-style"
           itemClass="carousel-item-padding-40-px"
         >

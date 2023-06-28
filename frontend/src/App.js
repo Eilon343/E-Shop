@@ -1,20 +1,22 @@
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import ProductPage from './pages/ProductPage';
-import Container from 'react-bootstrap/Container';
-import CartPage from './pages/CartPage';
-import Navbar from './components/Navbar';
-import SignInPage from './pages/SignInPage';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import ShippingAddressPage from './pages/ShippingAddressPage';
-import SignUpPage from './pages/SignUpPage';
-import PaymentMethodPage from './pages/PaymentMethodPage';
-import SubmitOrderPage from './pages/SubmitOrderPage';
-import OrderPage from './pages/OrderPage';
-import SearchPage from './pages/SearchPage';
-import OrderHistory from './pages/OrderHistory';
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
+import Container from "react-bootstrap/Container";
+import CartPage from "./pages/CartPage";
+import Navbar from "./components/Navbar";
+import SignInPage from "./pages/SignInPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ShippingAddressPage from "./pages/ShippingAddressPage";
+import SignUpPage from "./pages/SignUpPage";
+import PaymentMethodPage from "./pages/PaymentMethodPage";
+import SubmitOrderPage from "./pages/SubmitOrderPage";
+import OrderPage from "./pages/OrderPage";
+import SearchPage from "./pages/SearchPage";
+import OrderHistory from "./pages/OrderHistory";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 function App() {
   return (
@@ -27,6 +29,11 @@ function App() {
         <main>
           <Container className="mt-3">
             <Routes>
+              <Route
+                path="/reset-password/:id/:token"
+                element={<ResetPasswordPage />}
+              />
+              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/orderhistory" element={<OrderHistory />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/place-order/order/:id" element={<OrderPage />} />
