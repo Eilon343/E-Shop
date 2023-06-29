@@ -10,8 +10,8 @@ import {
   useLocation,
   Store,
   useNavigate,
-} from '../Imports';
-import SearchBox from './SearchBox';
+} from "../Imports";
+import SearchBox from "./SearchBox";
 
 const CustomNavbar = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -22,15 +22,15 @@ const CustomNavbar = () => {
   const navigate = useNavigate();
 
   const SignOutHandler = () => {
-    ctxDispatch({ type: 'USER_SIGNOUT' });
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('shippingAddress');
-    localStorage.removeItem('paymentMethod');
+    ctxDispatch({ type: "USER_SIGNOUT" });
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
   };
   return (
     <NavBar bg="dark" variant="dark">
       <Link onClick={() => navigate(-1)}>
-        {location.pathname !== '/' && (
+        {location.pathname !== "/" && (
           <i className="fa fa-arrow-left text-white align-arrow-right ms-3">
             Back
           </i>
@@ -40,7 +40,7 @@ const CustomNavbar = () => {
         <LinkContainer to="/">
           <NavBar.Brand>EShop</NavBar.Brand>
         </LinkContainer>
-        {location.pathname !== '/' ? (
+        {location.pathname !== "/" ? (
           <LinkContainer to="/">
             <NavBar.Brand>Home</NavBar.Brand>
           </LinkContainer>
@@ -60,9 +60,6 @@ const CustomNavbar = () => {
           </Link>
           {userInfo ? (
             <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
-              <LinkContainer to="/profile">
-                <NavDropdown.Item>User Profile</NavDropdown.Item>
-              </LinkContainer>
               <LinkContainer to="/orderhistory">
                 <NavDropdown.Item>Order History</NavDropdown.Item>
               </LinkContainer>

@@ -81,9 +81,9 @@ userRouter.post(
 
       var mailOptions = {
         from: "youremail@gmail.com",
-        to: "togames343@gmail.com",
+        to: email,
         subject: "Reset Password EShop",
-        text: `This is a link for resetting your password, notice that it will expire in 5 minutes. \n ${link}`,
+        text: `This is a link for resetting your password, notice that it will expire in 20 minutes. \n ${link}`,
       };
 
       transporter.sendMail(mailOptions, function (error, info) {
@@ -94,8 +94,12 @@ userRouter.post(
         }
       });
 
-      res.send("Done");
-    } catch (err) {}
+      res.send({
+        message: "Mail with link to reset password was sent to your mail.",
+      });
+    } catch (err) {
+      res.send({ message: err.message });
+    }
   })
 );
 

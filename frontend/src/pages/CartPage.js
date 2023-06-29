@@ -146,52 +146,6 @@ const CartPage = () => {
                 )}
               </Droppable>
             </DragDropContext>
-            // <ListGroup>
-            //   {cartList.map((item) => (
-            //     <ListGroup.Item key={item._id}>
-            //       <Row className="align-items-center">
-            //         <Col md={4}>
-            //           <img
-            //             className="img-fluid rounded img-thumbnail"
-            //             src={item.image}
-            //             alt={item.title}
-            //           ></img>{' '}
-            //           <Link to={`/product/${item.token}`}>{item.title}</Link>
-            //         </Col>
-            //         <Col md={3}>
-            //           <Button
-            //             variant="light"
-            //             disabled={item.quantity === 1}
-            //             onClick={() =>
-            //               updateCartHandler(item, item.quantity - 1)
-            //             }
-            //           >
-            //             <i className="fas fa-minus-circle"></i>
-            //           </Button>{' '}
-            //           <span>{item.quantity}</span>
-            //           <Button
-            //             variant="light"
-            //             disabled={item.quantity === item.countInStock}
-            //             onClick={() =>
-            //               updateCartHandler(item, item.quantity + 1)
-            //             }
-            //           >
-            //             <i className="fas fa-plus-circle"></i>
-            //           </Button>{' '}
-            //         </Col>
-            //         <Col md={3}>${item.price}</Col>
-            //         <Col md={2}>
-            //           <Button
-            //             variant="light"
-            //             onClick={() => removeItemHandler(item)}
-            //           >
-            //             <i className="fas fa-trash"></i>
-            //           </Button>{' '}
-            //         </Col>
-            //       </Row>
-            //     </ListGroup.Item>
-            //   ))}
-            // </ListGroup>
           )}
         </Col>
         <Col md={4}>

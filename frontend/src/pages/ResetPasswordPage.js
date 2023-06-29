@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { Helmet, getError, toast, useParams, axios, Link } from "../Imports";
+import {
+  Helmet,
+  getError,
+  toast,
+  useParams,
+  axios,
+  Link,
+  Loading,
+} from "../Imports";
 
 const ResetPasswordPage = () => {
   const { id, token } = useParams();
@@ -8,11 +16,14 @@ const ResetPasswordPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const submitHandler = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
+      setIsLoading(false);
       return;
     }
     try {
@@ -22,8 +33,10 @@ const ResetPasswordPage = () => {
       );
       toast.success(data.message + " you can sign in with your new password");
       setSuccess(true);
+      setIsLoading(false);
     } catch (err) {
       setError(true);
+      setIsLoading(false);
       toast.error(getError(err));
     }
   };
@@ -55,7 +68,7 @@ const ResetPasswordPage = () => {
         {error && (
           <div className="mb-3">
             {" "}
-            <Link to={`/forget-password`}>Click here to create a new link</Link>
+            <Link to={`/forgot-password`}>Click here to create a new link</Link>
           </div>
         )}
         {success && (
@@ -66,7 +79,7 @@ const ResetPasswordPage = () => {
         <div className="mb-3">
           <Button type="submit">Submit</Button>
         </div>
-        {/* {isLoading && <Loading />} */}
+        {isLoading && <Loading />}
       </Form>
     </Container>
   );

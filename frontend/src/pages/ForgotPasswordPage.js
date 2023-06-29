@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { Helmet, axios, getError, toast } from "../Imports";
+import { Helmet, Loading, axios, getError, toast } from "../Imports";
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [gotMail, setGotMail] = useState(false);
 
   const submitHandler = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       const { data } = await axios.post("/api/v1/users/forgot-password", {
         email: email,
       });
+      toast.success(data.message);
+      setIsLoading(false);
+      setGotMail(true);
     } catch (err) {
       toast.error(getError(err));
+      setIsLoading(false);
     }
   };
 
@@ -34,7 +41,14 @@ const ForgotPasswordPage = () => {
         <div className="mb-3">
           <Button type="submit">Submit</Button>
         </div>
-        {/* {isLoading && <Loading />} */}
+        {gotMail && (
+          <div className="mb-3">
+            <button onClick={() => submitHandler}>
+              If you haven't got mail, Click here to send mail again
+            </button>
+          </div>
+        )}
+        {isLoading && <Loading />}
       </Form>
     </Container>
   );
